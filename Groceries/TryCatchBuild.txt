@@ -1,0 +1,87 @@
+Getting Read for Procedure TryCatch for Integers
+public int checkIntEntry () {}
+
+Code that works for Checking Apple Entry
+
+//Sequence that asks about the number of Apples, Oranges, and Cheese
+System.out.println ("User enters a number of apples.\n");
+
+String apples_string1 = JOptionPane.showInputDialog ("Let's fill the box.\n" +
+              "Please enter how many whole Apples you would like.");
+int apples_int = 0; //default value for apples
+double apples_double = 0.0; //used to catch user entry if value has a decimal
+String apples_string2 = ""; //need to assign for IF inside Try-Catch
+
+//Build the tryCatch for the number of apples, oranges, and cheese blocks
+//This will need a flow chart for students! Print this out as variables
+try { //note: once a line fails, rest of try will not run
+  apples_double = Double.parseDouble(apples_string1);
+  //If parseDouble fails, user probably entered a string
+  //If parseDouble passes, user probably entered an integer
+  apples_double = 0.0; //reset this value and further test apples_string1
+}
+catch (NumberFormatException ne3) {
+  System.out.println ("User has failed first attempt at entering apples");
+  apples_string2 = JOptionPane.showInputDialog ("Please " +
+                 "enter how many whole Apples.\n" +
+                 "For example: \' 3 \'");
+  try {
+    apples_double = Double.parseDouble(apples_string2);
+  }
+  catch (NumberFormatException ne4) {
+    System.out.println ("User failed a second attempt for " +
+                      "an integer value of apples.");
+    JOptionPane.showMessageDialog (null, "Please restart the program and " +
+               "enter a whole number of apples, as a whole number.", "ERROR " +
+               "MESSAGE", JOptionPane.ERROR_MESSAGE);
+    System.exit(0);
+  }
+}
+if (apples_double > 0.0 ) {
+  try {
+    System.out.println ("Second attempt might be successful.");
+    apples_int = Integer.parseInt(apples_string2);
+    apples_string1 = apples_string2;
+    System.out.println("Second attempt successful and variables reassigned.");
+    apples_double = 0.0; //reset this value for math afterward
+  }
+  catch (NumberFormatException ne5) {
+    System.out.println ("User failed a second attempt for " +
+                        "an integer value of apples.");
+    JOptionPane.showMessageDialog (null, "Please restart the program and " +
+                "enter a whole number of apples, as a whole number.", "ERROR " +
+                "MESSAGE", JOptionPane.ERROR_MESSAGE);
+    System.exit(0);
+  }
+}
+try {
+  System.out.println ("User entered a double or int for number of apples.");
+  apples_int = Integer.parseInt(apples_string1);
+  //If parseInt fails, user probably entered a decimal
+  System.out.println ("User an int for number of apples.");
+}
+catch (NumberFormatException ne6) {
+  System.out.println ("User a decimal value for the number of apples.");
+  apples_string2 = JOptionPane.showInputDialog ("It seems you have entered " +
+        " a decimal number.\nPlease enter a number of whole Apples.\n" +
+        "For example: \' 3 \'");
+   try {
+     apples_int = Integer.parseInt(apples_string2);
+     apples_double = 0.0;
+   }
+   catch (NumberFormatException ne7) {
+     System.out.println ("User failed a second attempt for " +
+                         "the whole number of apples.");
+     JOptionPane.showMessageDialog (null, "Please restart the program and " +
+                "enter a whole number of apples, as a whole number.", "ERROR " +
+                "MESSAGE", JOptionPane.ERROR_MESSAGE);
+     System.exit(0);
+   }
+}
+
+System.out.println ("Hello");
+//Output all the variales to check values and reset if necessary
+System.out.println (apples_int);
+System.out.println (apples_double);
+System.out.println (apples_string1);
+System.out.println (apples_string2);
